@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+django = "*"
+django-extensions = "*"
+factory-boy = "*"
+django-debug-toolbar = "*"
+"psycopg2-binary" = "*"
+"django-tables2" = "*"
+django-filter = "*"
+whitenoise = "*"
+"django-bootstrap4" = "*"
+
+[requires]
+python_version = "3.6"
