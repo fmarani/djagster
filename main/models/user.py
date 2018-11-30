@@ -46,11 +46,3 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
-
-class Todo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    thing = models.CharField(max_length=32)
-    deadline = models.DateField()
-
-    def __str__(self):
-        return self.thing

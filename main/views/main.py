@@ -1,6 +1,5 @@
 import logging
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 from django.views.generic.edit import (
     FormView,
@@ -10,46 +9,16 @@ from django.views.generic.edit import (
 )
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
 import django_tables2 as tables
 from django_tables2.views import SingleTableView
 from main import models
-from main import forms
 
 
 logger = logging.getLogger(__name__)
 
 
-class SignupView(FormView):
-    template_name = "registration/signup.html"
-    form_class = forms.UserCreationForm
-
-    def get_success_url(self):
-        redirect_to = self.request.GET.get("next", "/")
-        return redirect_to
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        form.save()
-
-        email = form.cleaned_data.get("email")
-        raw_password = form.cleaned_data.get("password1")
-        logger.info(
-            "New signup for email=%s through SignupView", email
-        )
-
-        user = authenticate(email=email, password=raw_password)
-        login(self.request, user)
-
-        messages.info(
-            self.request, "You signed up successfully."
-        )
-
-        return response
-
-
 class TodoCreateView(LoginRequiredMixin, CreateView):
-    model = models.Todo
+    model = models.main.Todo
     fields = [
         "thing",
         "deadline",
@@ -64,7 +33,7 @@ class TodoCreateView(LoginRequiredMixin, CreateView):
 
 
 class TodoUpdateView(LoginRequiredMixin, UpdateView):
-    model = models.Todo
+    model = models.main.Todo
     fields = [
         "thing",
         "deadline",
@@ -76,7 +45,7 @@ class TodoUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class TodoDeleteView(LoginRequiredMixin, DeleteView):
-    model = models.Todo
+    model = models.main.Todo
     success_url = reverse_lazy("todo_list")
 
     def get_queryset(self):
@@ -88,7 +57,7 @@ class TodoTable(tables.Table):
                                     '<a href="{% url \'todo_delete\' record.id %}">Delete</a>')
 
     class Meta:
-        model = models.Todo
+        model = models.main.Todo
         exclude = ('id', 'user')
 
 
@@ -96,4 +65,4 @@ class TodoListView(LoginRequiredMixin, SingleTableView):
     table_class = TodoTable
 
     def get_queryset(self):
-        return models.Todo.objects.filter(user=self.request.user)
+        return models.main.Todo.objects.filter(user=self.request.user)

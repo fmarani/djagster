@@ -10,7 +10,7 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
-        model = models.User
+        model = models.user.User
         fields = ('email',)
 
     def clean_password2(self):
@@ -38,7 +38,7 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = models.User
+        model = models.user.User
         fields = ('email', 'password', 'is_active', 'is_staff', 'is_superuser')
 
     def clean_password(self):
