@@ -6,6 +6,10 @@ SECRET_KEY = '#(@r9^xj-8bet&7h@vomezh-mm18s2k5g500x3q^zy#_@z=a#e'
 DEBUG = True
 ALLOWED_HOSTS = []
 
+if os.environ.get("ENVIRONMENT") == "PRODUCTION":
+    DEBUG = False
+    ALLOWED_HOSTS = ['localhost']
+
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'django.contrib.admin',
@@ -16,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django_extensions",
     "debug_toolbar",
-    "django_filters",
     "django_tables2",
     "bootstrap4",
     "main.apps.MainConfig",

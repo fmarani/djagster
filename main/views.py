@@ -1,14 +1,18 @@
 import logging
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
-from django.views.generic.edit import FormView
+from django.views.generic.edit import (
+    FormView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django_filters.views import FilterView
-import django_filters
 import django_tables2 as tables
-from django_tables2.views import SingleTableMixin
+from django_tables2.views import SingleTableView
 from main import models
 from main import forms
 
@@ -44,23 +48,52 @@ class SignupView(FormView):
         return response
 
 
-class TodoFilter(django_filters.FilterSet):
-    class Meta:
-        model = models.Todo
-        fields = {
-            "thing": ["icontains"],
-        }
+class TodoCreateView(LoginRequiredMixin, CreateView):
+    model = models.Todo
+    fields = [
+        "thing",
+        "deadline",
+    ]
+    success_url = reverse_lazy("todo_list")
 
-    @property
-    def qs(self):
-        return super().qs.filter(user=self.request.user)
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.save()
+        return super().form_valid(form)
+
+
+class TodoUpdateView(LoginRequiredMixin, UpdateView):
+    model = models.Todo
+    fields = [
+        "thing",
+        "deadline",
+    ]
+    success_url = reverse_lazy("todo_list")
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user)
+
+
+class TodoDeleteView(LoginRequiredMixin, DeleteView):
+    model = models.Todo
+    success_url = reverse_lazy("todo_list")
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user)
+
 
 class TodoTable(tables.Table):
+    actions = tables.TemplateColumn('<a href="{% url \'todo_update\' record.id %}">Edit</a> '
+                                    '<a href="{% url \'todo_delete\' record.id %}">Delete</a>')
+
     class Meta:
         model = models.Todo
-        exclude = ('user',)
+        exclude = ('id', 'user')
 
-class DashboardView(LoginRequiredMixin, SingleTableMixin, FilterView):
-    filterset_class = TodoFilter
+
+class TodoListView(LoginRequiredMixin, SingleTableView):
     table_class = TodoTable
 
+    def get_queryset(self):
+        return models.Todo.objects.filter(user=self.request.user)

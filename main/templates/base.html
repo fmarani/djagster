@@ -27,7 +27,7 @@
                         </li>
                         {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url "dashboard" %}">Dashboard</a>
+                            <a class="nav-link" href="{% url "todo_list" %}">Todos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url "logout" %}?next=/">Logout</a>

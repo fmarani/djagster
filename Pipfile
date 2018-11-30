@@ -12,9 +12,9 @@ factory-boy = "*"
 django-debug-toolbar = "*"
 "psycopg2-binary" = "*"
 "django-tables2" = "*"
-django-filter = "*"
 whitenoise = "*"
 "django-bootstrap4" = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
