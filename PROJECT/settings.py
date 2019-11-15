@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     "django_tables2",
     "bootstrap4",
     "main.apps.MainConfig",
+    "vue_spa.apps.CoreConfig",
+    "webpack_loader",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
@@ -126,3 +129,16 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
 EMAIL_SUBJECT_PREFIX = "[PROJECT] "
 AUTH_USER_MODEL = "main.User"
+
+INERTIA_TEMPLATE = 'spa_boot.html'
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        # IMPORTANT: change vue_spa to the name of your django app
+        'STATS_FILE': os.path.join(BASE_DIR, 'vue_spa/inertia/webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
+}
