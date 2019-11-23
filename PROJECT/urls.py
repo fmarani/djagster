@@ -13,12 +13,14 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
-from main import urls
+from main import urls as main_urls
+from vue_spa import urls as spa_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include(urls)),
+    path('goals/', include(spa_urls)),
+    path('', include(main_urls)),
 ]
 
 if settings.DEBUG:

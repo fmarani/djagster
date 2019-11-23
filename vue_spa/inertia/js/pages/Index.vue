@@ -1,6 +1,7 @@
 <template>
   <Layout>
     <h2>Success!</h2>
+    <p>{{ $page.shared.title }}</p>
     <p>Inertia.js Django Boilerplate is working!</p>
   </Layout>
 </template>

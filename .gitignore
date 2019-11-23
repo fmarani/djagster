@@ -1,1 +1,4 @@
 __pycache__/
+node_modules/
+vue_spa/static/
+vue_spa/inertia/webpack-stats.json
