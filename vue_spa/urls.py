@@ -22,5 +22,6 @@ path(
 
 urlpatterns = [
     path('index', views.index),
+    path('list', views.GoalListView.as_view()),
     path('simple', views.simple)
 ]

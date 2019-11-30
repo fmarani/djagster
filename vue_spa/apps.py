@@ -9,12 +9,15 @@ from inertia import share, asset_version
 
 def current_user(request):
     class UserSerializer(serializers.ModelSerializer):
-
         class Meta:
             model = get_user_model()
             fields = ["username", "email"]
 
-    return UserSerializer(get_user(request)).data
+    user = get_user(request)
+    if user.is_authenticated:
+        return UserSerializer(user).data
+    else:
+        return {}
 
 
 class CoreConfig(AppConfig):

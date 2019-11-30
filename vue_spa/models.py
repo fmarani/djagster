@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
+from rest_framework import serializers
 
 
 class Goal(models.Model):
@@ -16,3 +17,8 @@ class Goal(models.Model):
 
     def __str__(self):
         return self.thing
+
+class GoalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Goal
+        fields = ['id', 'thing', 'progress']
