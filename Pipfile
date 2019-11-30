@@ -18,6 +18,7 @@ gunicorn = "*"
 djangorestframework = "*"
 django-webpack-loader = "*"
 inertia-django = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.7"
