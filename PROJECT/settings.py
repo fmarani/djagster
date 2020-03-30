@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django_extensions",
     "debug_toolbar",
+    "django_filters",
     "django_tables2",
     "bootstrap4",
     "main.apps.MainConfig",

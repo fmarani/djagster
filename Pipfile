@@ -6,15 +6,16 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-django = "*"
+Django = "*"
 django-extensions = "*"
 factory-boy = "*"
 django-debug-toolbar = "*"
-"psycopg2-binary" = "*"
-"django-tables2" = "*"
+psycopg2-binary = "*"
+django-tables2 = "*"
 whitenoise = "*"
-"django-bootstrap4" = "*"
+django-bootstrap4 = "*"
 gunicorn = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
