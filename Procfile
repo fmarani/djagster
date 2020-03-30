@@ -1,1 +1,1 @@
-web: env ENVIRONMENT=PRODUCTION gunicorn paybyemail.wsgi
+web: env ENVIRONMENT=PRODUCTION gunicorn PROJECT.wsgi
