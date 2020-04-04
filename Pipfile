@@ -4,6 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
+black = "*"
+flake8 = "*"
+isort = "*"
 
 [packages]
 Django = "*"
@@ -19,3 +22,6 @@ django-filter = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
