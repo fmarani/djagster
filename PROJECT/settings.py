@@ -112,11 +112,6 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": True,
         },
-        "booktime": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": True,
-        },
     },
 }
 
