@@ -17,8 +17,10 @@ psycopg2-binary = "*"
 django-tables2 = "*"
 whitenoise = "*"
 django-bootstrap4 = "*"
-gunicorn = "*"
 django-filter = "*"
+dj-database-url = "*"
+dj-email-url = "*"
+daphne = "*"
 
 [requires]
 python_version = "3.7"

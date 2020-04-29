@@ -1,1 +1,1 @@
-web: env ENVIRONMENT=PRODUCTION gunicorn PROJECT.wsgi
+web: env ENVIRONMENT=PRODUCTION daphne PROJECT.asgi:application
