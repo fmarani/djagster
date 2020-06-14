@@ -1,4 +1,4 @@
-import logging
+import structlog
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render
 from django.views.generic.edit import (
@@ -9,12 +9,10 @@ from django.views.generic.edit import (
 )
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-import django_tables2 as tables
-from django_tables2.views import SingleTableView
 from main import models
 
 
-logger = logging.getLogger(__name__)
+logger = structlog.get_logger(__name__)
 
 
 class TodoCreateView(LoginRequiredMixin, CreateView):
@@ -52,17 +50,6 @@ class TodoDeleteView(LoginRequiredMixin, DeleteView):
         return self.model.objects.filter(user=self.request.user)
 
 
-class TodoTable(tables.Table):
-    actions = tables.TemplateColumn('<a href="{% url \'todo_update\' record.id %}">Edit</a> '
-                                    '<a href="{% url \'todo_delete\' record.id %}">Delete</a>')
-
-    class Meta:
-        model = models.main.Todo
-        exclude = ('id', 'user')
-
-
-class TodoListView(LoginRequiredMixin, SingleTableView):
-    table_class = TodoTable
-
+class TodoListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return models.main.Todo.objects.filter(user=self.request.user)

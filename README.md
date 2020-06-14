@@ -5,6 +5,8 @@ Clone this project, remove the things you do not need and get started.
 
 The included db.sqlite3 has a default superuser with email: admin@admin.com and pw: abcabcabc
 
+Remember to create a `.env` file. Copy `.env.template` to start with.
+
 
 Things to do before launch
 ===

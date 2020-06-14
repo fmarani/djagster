@@ -4,9 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-black = "*"
-flake8 = "*"
-isort = "*"
+pre-commit = "*"
+django-webtest = "*"
 
 [packages]
 Django = "*"
@@ -14,16 +13,16 @@ django-extensions = "*"
 factory-boy = "*"
 django-debug-toolbar = "*"
 psycopg2-binary = "*"
-django-tables2 = "*"
 whitenoise = "*"
 django-bootstrap4 = "*"
 django-filter = "*"
 dj-database-url = "*"
 dj-email-url = "*"
-daphne = "*"
-
-[requires]
-python_version = "3.7"
+livereload = "*"
+honcho = "*"
+structlog = "*"
+colorama = "*"
+uvicorn = "*"
 
 [pipenv]
 allow_prereleases = true

@@ -1,5 +1,8 @@
 import os
 
+import dj_database_url
+import dj_email_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#(@r9^xj-8bet&7h@vomezh-mm18s2k5g500x3q^zy#_@z=a#e'
 
@@ -21,7 +24,6 @@ INSTALLED_APPS = [
     "django_extensions",
     "debug_toolbar",
     "django_filters",
-    "django_tables2",
     "bootstrap4",
     "main.apps.MainConfig",
 ]
@@ -59,12 +61,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PROJECT.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -93,6 +90,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+email_config = dj_email_url.config()
+vars().update(email_config)
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -118,7 +118,6 @@ LOGGING = {
 LOGIN_REDIRECT_URL = "/"
 
 INTERNAL_IPS = ["127.0.0.1"]
-DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"
 
 EMAIL_SUBJECT_PREFIX = "[PROJECT] "
 AUTH_USER_MODEL = "main.User"

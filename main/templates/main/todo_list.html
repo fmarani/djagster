@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load render_table from django_tables2 %}
 {% load bootstrap4 %}
 
 {% block content %}
@@ -8,6 +7,22 @@
     <a href="{% url "todo_create" %}">Create</a>
   </p>
   <p>
-    {% render_table table %}
+  <table class="table">
+    <tr>
+      <th>Thing</th>
+      <th>Deadline</th>
+      <th>Actions</th>
+    </tr>
+    {% for object in object_list %}
+      <tr>
+        <td>{{ object.thing }}</td>
+        <td>{{ object.deadline }}</td>
+        <td>
+          <a href="{% url 'todo_update' object.id %}">Edit</a>
+          <a href="{% url 'todo_delete' object.id %}">Delete</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
   </p>
 {% endblock content %}
