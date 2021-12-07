@@ -3,8 +3,11 @@ import os
 import dj_database_url
 import dj_email_url
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = '#(@r9^xj-8bet&7h@vomezh-mm18s2k5g500x3q^zy#_@z=a#e'
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = 'django-insecure-=x+lmf0g+hx6z^n+icukhjw+568a%=wpw^&hqw_bu=&x0yfwj3'
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -114,6 +117,8 @@ LOGGING = {
         },
     },
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"
 

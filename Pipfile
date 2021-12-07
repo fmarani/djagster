@@ -5,7 +5,6 @@ name = "pypi"
 
 [dev-packages]
 pre-commit = "*"
-django-webtest = "*"
 
 [packages]
 Django = "*"
@@ -23,6 +22,7 @@ honcho = "*"
 structlog = "*"
 colorama = "*"
 uvicorn = "*"
+django = "*"
 
 [pipenv]
 allow_prereleases = true
